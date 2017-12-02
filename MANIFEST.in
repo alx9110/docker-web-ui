@@ -1,0 +1,3 @@
+recursive-include itdctools/templates *.html
+recursive-include itdctools/static *.css
+recursive-include itdctools/static *.js

@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+export DH_VIRTUALENV_INSTALL_ROOT=/usr/share
+
+%:
+	LC_ALL=en_US.UTF-8 dh $@ --with python-virtualenv
+
+override_dh_install:
+	dh_install -X.pyc
