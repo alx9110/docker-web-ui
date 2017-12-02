@@ -19,6 +19,7 @@ class Production(Config):
     """
         ProductionConfig
     """
+    DEBUG = False
 
 
 class Development(Config):
@@ -33,6 +34,7 @@ class Testing(Config):
         TestingConfig
     """
     TESTING = True
+    DEBUG = True
 
 
 config = {
