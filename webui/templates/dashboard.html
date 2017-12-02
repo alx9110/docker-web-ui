@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-  <h2>Running containers</h2>
+    <h4 align='center'>Running images</h4>
+    <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">CONTAINER ID</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">COMMAND</th>
+                <th scope="col">CREATED</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">PORTS</th>
+                <th scope="col">NAMES</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for line in ps %}
+              <tr>
+                <td>{{ line.id }}</td>
+                <td>{{ line.image }}</td>
+                <td>{{ line.command }}</td>
+                <td>{{ line.created }}</td>
+                <td>{{ line.status }}</td>
+                <td>{{ line.port }}</td>
+                <td>{{ line.names }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
 </div>
 {% endblock %}

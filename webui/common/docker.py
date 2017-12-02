@@ -25,7 +25,7 @@ class Container(object):
         self.id = self.raw[0]
         self.image = self.raw[1]
         self.command = self.raw[2]
-        self.created = self.raw[3:7]
-        self.status = self.raw[8]
-        self.port = self.raw[8]
-        self.names = self.raw[9]
+        self.created = ' '.join(self.raw[3:6])
+        self.status = ' '.join(self.raw[6:11])
+        self.port = ' '
+        self.names = self.raw[-1]

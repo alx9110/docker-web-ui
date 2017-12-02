@@ -10,6 +10,6 @@ view = Blueprint('dashboard', __name__)
 @view.route('/', methods=['GET'])
 def dashboard():
     """ Index page """
-    nets = subprocess.check_output('docker network ls', shell=True).decode().split('\n')[1:]
-    nets_obj = [docker.Network(raw) for raw in nets if raw]
-    return render_template('dashboard.html', nets=nets_obj)
+    ps = subprocess.check_output('docker ps', shell=True).decode().split('\n')[1:]
+    ps_obj = [docker.Container(raw) for raw in ps if raw]
+    return render_template('dashboard.html', ps=ps_obj)
