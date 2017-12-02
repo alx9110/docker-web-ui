@@ -14,6 +14,25 @@
         min-height: 75rem;
         padding-top: 4.5rem;
         }
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+          position: relative;
+          min-height: 10%;
+        }
+        body {
+          /* Margin bottom by footer height */
+          margin-bottom: 60px;
+        }
+        .footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          /* Set the fixed height of the footer here */
+          height: 60px;
+          line-height: 60px; /* Vertically center the text there */
+          background-color: #f5f5f5;
+        }
     </style>
   </head>
   <body>
@@ -33,7 +52,7 @@
               <a class="nav-link" href="/networks">Network</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Images</a>
+                <a class="nav-link" href="/images">Images</a>
               </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Running images</a>
@@ -47,47 +66,28 @@
         </div>
       </nav>
 <!-- Notify block -->
+
 <div class="container alert alert-warning" role="alert">
-<img src="static/images/docker.png" width="15%" height="15%"/>
-Hello <a href="https://www.docker.com/" class="alert-link">Docker</a>!
+    <div class="row">
+        <div class="col">
+            <img src="static/images/docker.png" width="40%" height="100%"/>
+        </div>
+        <div class="col">
+            <h3>Hello <a href="https://www.docker.com/" class="alert-link">Docker</a>!</h3>
+        </div>
+        <div class="col"></div>
+      </div>
 </div>      
 <!-- end notify -->
 <div class="container">
-    <h4 align='center'>Networks</h4>
-    <table class="table">
-    <thead class="thead-dark">
-    <tr>
-    <th scope="col">network id</th>
-    <th scope="col">name</th>
-    <th scope="col">driver</th>
-    <th scope="col">scope</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for net in nets %}
-    <tr>
-    <td>{{ net.id }}</td>
-    <td><a href="#">{{ net.name }}</a></td>
-    <td>{{ net.driver }}</td>
-    <td>{{ net.scope }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-<div>
-        <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Create Network
-                </a>
-              </p>
-              <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
-              </div>
-</div>
+{% block content %}{% endblock %}
 </div>
 
+<footer class="footer">
+    <div class="container">
+      <span class="text-muted">Alexander Telkov 2017</span>
+    </div>
+</footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

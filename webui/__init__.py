@@ -1,6 +1,6 @@
 """ Init """
 from flask import Flask
-from .routes import dashboard, networks
+from .routes import dashboard, networks, images
 from .config import config
 
 
@@ -15,5 +15,6 @@ def create_app(environment):
     # Blueprints register
     app.register_blueprint(dashboard.view)
     app.register_blueprint(networks.view)
+    app.register_blueprint(images.view)
 
     return app
