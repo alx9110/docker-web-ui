@@ -15,17 +15,17 @@
               </tr>
             </thead>
             <tbody>
-                {% for line in ps %}
+              {% for c in containers %}
               <tr>
-                <td>{{ line.id }}</td>
-                <td>{{ line.image }}</td>
-                <td>{{ line.command }}</td>
-                <td>{{ line.created }}</td>
-                <td>{{ line.status }}</td>
-                <td>{{ line.port }}</td>
-                <td>{{ line.names }}</td>
+                <td>{{c.short_id}}</td>
+                <td>{{c.image}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
-            {% endfor %}
+              {% endfor %}
             </tbody>
           </table>
 </div>

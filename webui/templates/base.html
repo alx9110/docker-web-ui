@@ -52,13 +52,19 @@
               <a class="nav-link" href="/networks">Network</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/images">Images</a>
-              </li>
+              <a class="nav-link" href="/images">Images</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="/containers">Containers</a>
-              </li>
+              <a class="nav-link" href="/containers">Dockerfiles</a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Running images</a>
+              <a class="nav-link" href="/containers">Builds</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/containers">Graphics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Monitoring</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
@@ -68,23 +74,15 @@
         </div>
         </div>
       </nav>
-<!-- Notify block -->
 
-<div class="container alert alert-warning" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    <div class="row">
-        <div class="col">
-            <img src="static/images/docker.png" width="40%" height="100%"/>
-        </div>
-        <div class="col">
-            <h3>Hello <a href="https://www.docker.com/" class="alert-link">Docker</a>!</h3>
-        </div>
-        <div class="col"></div>
-      </div>
-</div>      
-<!-- end notify -->
+<div class="container">
+  <div class="jumbotron">
+      <h1 class="display-5">I'am DockerWebUI, and you?</h1>
+      <p><img src="static/images/docker.png" width="20%" height="100%"/></p>
+      <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+  </div>
+</div>
+
 <div class="container">
 {% block content %}{% endblock %}
 </div>

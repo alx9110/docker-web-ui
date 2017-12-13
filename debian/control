@@ -1,16 +1,16 @@
-Source: yandex-haas-itdctools-app
+Source: docker-web-ui
 Section: misc
 Priority: optional
-Maintainer: Alexander Telkov <midiblack@yandex-team.ru> 
+Maintainer: Alexander Telkov <alx9110@yandex.ru> 
 Build-Depends: debhelper (>= 7),
   python, python-dev, python-setuptools,
   libfontconfig1
 Standards-Version: 3.9.6
-Homepage: https://github.yandex-team.ru/midiblack/python-itdctools
+Homepage: https://github.com
 
-Package: yandex-haas-itdctools-app
+Package: docker-web-ui
 Architecture: all
-Homepage: https://itdc.yandex-team.ru/
+Homepage: any.ru
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends}, ${python:Depends}
-Description: Service for automatization IT Operations.
+Description: Yet another UI.
