@@ -7,8 +7,8 @@
               <tr>
                 <th scope="col">CONTAINER ID</th>
                 <th scope="col">IMAGE</th>
-                <th scope="col">COMMAND</th>
-                <th scope="col">CREATED</th>
+                <th scope="col">PATH</th>
+                <th scope="col">ip address</th>
                 <th scope="col">STATUS</th>
                 <th scope="col">PORTS</th>
                 <th scope="col">NAMES</th>
@@ -17,13 +17,13 @@
             <tbody>
               {% for c in containers %}
               <tr>
-                <td>{{c.short_id}}</td>
-                <td>{{c.image}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ c.short_id }}</td>
+                <td>{{ c.image }}</td>
+                <td>{{ c.attrs['Path'] }}</td>
+                <td>{{ c.attrs['NetworkSettings']['IPAddress'] }}</td>
+                <td>{{ c.status }}</td>
+                <td>{{ c.attrs['NetworkSettings']['Ports'] }}</td>
+                <td>{{ c.name }}</td>
               </tr>
               {% endfor %}
             </tbody>

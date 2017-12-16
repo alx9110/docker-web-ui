@@ -14,10 +14,10 @@
     <tbody>
     {% for net in nets %}
     <tr>
-    <td>{{ net.id }}</td>
+    <td>{{ net.short_id }}</td>
     <td><a href="#">{{ net.name }}</a></td>
-    <td>{{ net.driver }}</td>
-    <td>{{ net.scope }}</td>
+    <td>{{ net.attrs['Driver'] }}</td>
+    <td>{{ net.attrs['Scope'] }}</td>
     </tr>
     {% endfor %}
     </tbody>
