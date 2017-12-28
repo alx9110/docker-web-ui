@@ -1,5 +1,6 @@
 """ General route """
-from flask import render_template, Blueprint
+import os
+from flask import request, render_template, Blueprint
 import docker
 
 
@@ -21,3 +22,15 @@ RUN echo 'Hi, I am in your container'
 EXPOSE 80
 """
     return render_template('dockerfile.html', plh=plh.strip())
+
+
+@view.route('/upload', methods=['POST'])
+def upload_file():
+    """ Dockerfile upload """
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            filename = 'Dockerfile'
+            file.save(os.path.join('./', filename))
+            return 'OK'
+    return "Noooo"
