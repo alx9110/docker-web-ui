@@ -1,38 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
+
+<div>
+<p>
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+Create Network
+</a>
+</p>
+<div class="collapse" id="collapseExample">
+<div class="card card-body">
+<form action="/networks/create" method="GET">
+<div class="form-group">
+<label for="exampleInputEmail1">Network name</label>
+<input name="net_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter network name">
+<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<button type="submit" class="btn btn-success">Create</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+    <br/>
     <h4 align='center'>Networks</h4>
     <table class="table">
     <thead class="thead-dark">
     <tr>
     <th scope="col">network id</th>
+    <th scope="col">action</th>
     <th scope="col">name</th>
     <th scope="col">driver</th>
     <th scope="col">scope</th>
+    <th scope="col">owner</th>
     </tr>
     </thead>
     <tbody>
     {% for net in nets %}
     <tr>
     <td>{{ net.short_id }}</td>
-    <td><a href="#">{{ net.name }}</a></td>
+    <td>
+      <a on-click=confirm(); href="/networks/delete/{{net.short_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      <a target="_blank" href="/networks/inspect/{{net.short_id}}">{}</a>
+    </td>
+    <td>{{ net.name }}</td>
     <td>{{ net.attrs['Driver'] }}</td>
     <td>{{ net.attrs['Scope'] }}</td>
+    <td>Platform</td>
     </tr>
     {% endfor %}
     </tbody>
     </table>
-<div>
-        <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Create Network
-                </a>
-              </p>
-              <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
-              </div>
-</div>
 </div>
 {% endblock %}
