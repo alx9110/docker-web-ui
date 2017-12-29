@@ -5,7 +5,8 @@ from flask import render_template,\
                   request,\
                   redirect,\
                   jsonify,\
-                  session
+                  session,\
+                  current_app
 import docker
 
 
@@ -18,7 +19,10 @@ def networks():
     client = docker.from_env()
     nets = client.networks.list()
     user = session.get('login', None)
-    return render_template('networks.html', nets=nets, user=user)
+    sys_nets = ('8e50cb1905', '85e90599f8', '9ee0ad4605', 'cdb38722ad')
+    return render_template('networks.html',
+                           nets=[net for net in nets if net.short_id not in sys_nets],
+                           user=user)
 
 
 @view.route('/networks/create', methods=['GET'])
@@ -36,7 +40,7 @@ def network_remove(name=None):
     """ Remove network """
     client = docker.from_env()
     user = session.get('login', None)
-    if user != 'root@yandex.ru':
+    if user != current_app.config.get('ROOT_LOGIN', None):
         flash('ACL warning: You don\'t remove this network.', 'danger')
         return redirect('/networks')
     client.networks.get(name).remove()
@@ -46,7 +50,7 @@ def network_remove(name=None):
 
 @view.route('/networks/inspect/<name>', methods=['GET'])
 def network_inspect(name=None):
-    """ Remove network """
+    """ Network inspect """
     client = docker.from_env()
     inspect = client.networks.get(name).attrs
     return jsonify(inspect)
