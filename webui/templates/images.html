@@ -5,6 +5,7 @@
     <table class="table">
             <thead class="thead-dark">
               <tr>
+                <th scope="col">action</th>
                 <th scope="col">short id</th>
                 <th scope="col">tags</th>
                 <th scope="col">collection</th>
@@ -13,6 +14,7 @@
             <tbody>
               {% for img in images %}
               <tr>
+                <td><a href="/images/run/{{ img.short_id }}">run</a></td>
                 <td>{{ img.short_id }}</td>
                 <td>{{ img.tags }}</td>
                 <td>{{ img.collection }}</td>

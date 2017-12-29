@@ -19,6 +19,6 @@ def images():
 def run_image(name):
     """ Run container from image """
     client = docker.client.from_env()
-    client.containers.run(name, detach=True, ports={'80/tcp': None})
+    client.containers.run(name.lstrip('sha256:'), detach=True, ports={'80/tcp': None})
     flash('Container is started', 'success')
     return redirect('/images')
