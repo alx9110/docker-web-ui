@@ -13,6 +13,8 @@ class Config(object):
     """
     DEBUG = False
     SECRET_KEY = os.urandom(24)
+    ROOT_LOGIN = ''
+    ROOT_PASSWORD_HASH = ''
 
 
 class Production(Config):
@@ -27,6 +29,8 @@ class Development(Config):
         DevelopmentConfig
     """
     DEBUG = True
+    ROOT_LOGIN = 'admin@docker.ru' # root e-mail
+    ROOT_PASSWORD_HASH = 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342' # sha256 hash.hexdigest()
 
 
 class Testing(Config):
