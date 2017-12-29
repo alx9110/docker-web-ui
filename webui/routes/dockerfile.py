@@ -1,6 +1,6 @@
 """ General route """
 import os
-from flask import request, render_template, Blueprint
+from flask import request, render_template, Blueprint, session
 import docker
 
 
@@ -21,7 +21,8 @@ RUN echo 'Hi, I am in your container'
         >/usr/share/nginx/html/index.html
 EXPOSE 80
 """
-    return render_template('dockerfile.html', plh=plh.strip())
+    user = session.get('login', None)
+    return render_template('dockerfile.html', plh=plh.strip(), user=user)
 
 
 @view.route('/upload', methods=['POST'])
