@@ -14,7 +14,10 @@
             <tbody>
               {% for img in images %}
               <tr>
-                <td><a href="/images/run/{{ img.short_id }}"><i class="fa fa-play-circle" aria-hidden="true"></i></a></td>
+                <td>
+                  <a href="/images/run/{{ img.short_id }}"><i class="fa fa-play-circle" aria-hidden="true"></i></a>
+                  <a href="/images/remove/{{ img.short_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
                 <td>{{ img.short_id }}</td>
                 <td>{{ img.tags }}</td>
                 <td>{{ img.collection }}</td>
