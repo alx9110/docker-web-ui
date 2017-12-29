@@ -28,6 +28,10 @@ def run_image(name):
 def remove_image(name):
     """ Remove some image """
     client = docker.client.from_env()
-    client.images.remove(name.lstrip('sha256:'), force=True)
-    flash('Image has been removed', 'success')
-    return redirect('/images')
+    try:
+        client.images.remove(name.lstrip('sha256:'), force=True)
+        flash('Image has been removed', 'success')
+        return redirect('/images')
+    except docker.errors.APIError:
+        flash(str(docker.errors.APIError.__doc__), 'danger')
+        return redirect('/images')
