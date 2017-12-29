@@ -5,12 +5,13 @@
         <label for="exampleFormControlTextarea1">Dockerfile</label>
         <textarea placeholder="{{ plh }}" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
     </div>
-</div>
-<form action="/upload" enctype=multipart/form-data method="POST">
+    <form action="/upload" enctype=multipart/form-data method="POST">
         <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
+          <label for="exampleFormControlFile1">Your Dockerfile</label>
           <input name='file' type="file" class="form-control-file" id="exampleFormControlFile1">
-          <input type="submit">
+          <br/>
+          <input type="submit" value="Upload">
         </div>
 </form>
+</div>
 {% endblock %}

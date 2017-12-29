@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% if user %}
+{% else %}
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-5">I'am DockerWebUI, and you?</h1>
+        <h1 class="display-5">Yet another Docker Web UI</h1>
         <p><img src="static/images/docker.png" width="20%" height="100%"/></p>
-        <p><a class="btn btn-lg btn-primary" href="http://bootstrap-4.ru/docs/4.0/examples/signin/" role="button">Sign up today</a></p>
+        <p><a class="btn btn-lg btn-primary" href="/auth" role="button">Sign up today</a></p>
     </div>
 </div>
+{% endif %}
 
 <div class="container">
     <h4 align='center'>Running images</h4>
