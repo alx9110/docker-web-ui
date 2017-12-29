@@ -67,14 +67,16 @@
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Monitoring</a>
             </li>
-            {% if user %}
-            <li class="nav-item">
-              <a class="nav-link" href="/"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;{{user}}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-            </li>
-            {% endif %}
+          </ul>
+          <ul class="navbar-nav mr-auto float-right">
+              {% if user %}
+              <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;{{user}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+              </li>
+              {% endif %}
           </ul>
         </div>
         </div>
