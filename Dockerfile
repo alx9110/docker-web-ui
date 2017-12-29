@@ -1,5 +1,6 @@
 FROM ubuntu:trusty
 ENV DEBIAN_FRONTEND noninteractive
+MAINTAINER alx9110@yandex.ru
 EXPOSE 80
 RUN locale-gen ru_RU.UTF-8 && dpkg-reconfigure locales; \
 echo 'Europe/Moscow' > /etc/timezone && dpkg-reconfigure tzdata
