@@ -1,6 +1,6 @@
 """ Init """
 from flask import Flask
-from .routes import dashboard, networks, images, dockerfile, auth
+from .routes import dashboard, networks, images, dockerfile, auth, user
 from .config import config
 
 
@@ -18,5 +18,7 @@ def create_app(environment):
     app.register_blueprint(networks.view)
     app.register_blueprint(images.view)
     app.register_blueprint(dockerfile.view)
+    # User profile include
+    app.register_blueprint(user.view)
 
     return app
