@@ -12,14 +12,32 @@
 {% endif %}
 
 <div class="container">
-    <h4 align='center'>Running images</h4>
-    <table class="table">
+    <h4 align='center'>Running containers</h4>
+    <div class="row">
+        {% for c in containers %}
+        <div style="font-size: 14px;" class="col-sm-4">
+            <div style="height: 160px;" class="card text-white bg-primary mb-3">
+                <div class="card-header">{{ c.name }} | <a href="/kill/{{ c.short_id }}"><i style="color: #fff;" class="fa fa-power-off" aria-hidden="true"></i></a></div>
+                <div class="card-body">
+                  <h4 style="font-size: 12px;" class="card-title">{{ c.image }}</h4>
+                  <p class="card-text">
+                    {% for key in c.attrs['NetworkSettings']['Ports'] %}
+                    { {{ key }}: {{ c.attrs['NetworkSettings']['Ports'][key]}} }
+                    {% endfor %}
+                  </p>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    <table style="font-size: 14px;" class="table">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">CONTAINER ID</th>
+                <th scope="col">ACTION</th>
+                <th scope="col">SHORT_ID</th>
                 <th scope="col">IMAGE</th>
-                <th scope="col">PATH</th>
-                <th scope="col">ip address</th>
+                <th scope="col">IP</th>
                 <th scope="col">STATUS</th>
                 <th scope="col">PORTS</th>
                 <th scope="col">NAMES</th>
@@ -28,9 +46,9 @@
             <tbody>
               {% for c in containers %}
               <tr>
+                <td><a href="/kill/{{ c.short_id }}"><i class="fa fa-power-off" aria-hidden="true"></i></a></td>
                 <td>{{ c.short_id }}</td>
                 <td>{{ c.image }}</td>
-                <td>{{ c.attrs['Path'] }}</td>
                 <td>{{ c.attrs['NetworkSettings']['IPAddress'] }}</td>
                 <td>{{ c.status }}</td>
                 <td>{{ c.attrs['NetworkSettings']['Ports'] }}</td>

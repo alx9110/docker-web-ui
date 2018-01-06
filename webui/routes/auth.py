@@ -1,4 +1,4 @@
-""" General route """
+""" Auth components """
 import os
 import hashlib
 from flask import request, render_template, Blueprint, session, redirect, flash
