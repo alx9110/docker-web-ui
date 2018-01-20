@@ -19,7 +19,7 @@ def images():
 def run_image(name):
     """ Run container from image """
     client = docker.client.from_env()
-    client.containers.run(name.lstrip('sha256:'), detach=True, ports={'80/tcp': None})
+    client.containers.run(name.replace('sha256:', ''), detach=True, ports={'80/tcp': None})
     flash('Container is started', 'success')
     return redirect('/images')
 
@@ -29,7 +29,7 @@ def remove_image(name):
     """ Remove some image """
     client = docker.client.from_env()
     try:
-        client.images.remove(name.lstrip('sha256:'), force=True)
+        client.images.remove(name.replace('sha256:', ''), force=True)
         flash('Image has been removed', 'success')
         return redirect('/images')
     except docker.errors.APIError:

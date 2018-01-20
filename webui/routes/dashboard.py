@@ -1,6 +1,7 @@
 """ General route """
 from flask import render_template, Blueprint, session, redirect, flash
 import docker
+from ..common.containers import Container
 
 
 view = Blueprint('dashboard', __name__)
@@ -12,7 +13,11 @@ def dashboard():
     user = session.get('login', None)
     client = docker.from_env()
     containers = client.containers.list()
-    return render_template('dashboard.html', containers=containers, user=user)
+    status = {'count': len(containers),
+             }
+    return render_template('dashboard.html',
+                           containers=containers,
+                           user=user, status=status)
 
 
 @view.route('/kill/<short_id>', methods=['GET'])

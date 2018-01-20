@@ -19,10 +19,7 @@ def networks():
     client = docker.from_env()
     nets = client.networks.list()
     user = session.get('login', None)
-    sys_nets = ('8e50cb1905', '85e90599f8', '9ee0ad4605', 'cdb38722ad')
-    return render_template('networks.html',
-                           nets=[net for net in nets if net.short_id not in sys_nets],
-                           user=user)
+    return render_template('networks.html', user=user, nets=nets)
 
 
 @view.route('/networks/create', methods=['GET'])
