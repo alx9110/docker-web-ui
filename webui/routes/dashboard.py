@@ -1,7 +1,6 @@
 """ General route """
 from flask import render_template, Blueprint, session, redirect, flash
 import docker
-from ..common.containers import Container
 
 
 view = Blueprint('dashboard', __name__)
