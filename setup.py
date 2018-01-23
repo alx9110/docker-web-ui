@@ -7,6 +7,8 @@ requirements = [
     'flask>=0.10',
     'requests',
     'docker',
+    'redis',
+    'rq',
 ]
 
 setup(
