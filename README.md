@@ -12,4 +12,9 @@ A Flask app for the Docker UI.
 ~$ python setup.py install
 ```
 
+## Development
+```bash
+~$ python run.py
+```
+
 ## Usage
