@@ -1,6 +1,6 @@
-import requests
-import subprocess
+from subprocess import Popen, PIPE
 
 
-def count_words_at_url(url):    
-    return subprocess.call('git clone https://github.com/alx9110/docker-auto-build.git')
+def build_from_git(url):
+    res = Popen('/usr/bin/git clone {0} /tmp/test-build'.format(url), shell=True, stdout=PIPE, universal_newlines=True)
+    return res.stdout.read()
