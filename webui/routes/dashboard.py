@@ -1,6 +1,7 @@
 """ General route """
-from flask import render_template, Blueprint, session, redirect, flash
+from flask import render_template, Blueprint, session, redirect, flash, jsonify
 import docker
+import json
 
 
 view = Blueprint('dashboard', __name__)
@@ -14,9 +15,11 @@ def dashboard():
     containers = client.containers.list()
     status = {'count': len(containers),
              }
+    detail = [json.loads(next(c.stats()), encoding='utf-8') for c in containers]
+    # return jsonify(detail[0])
     return render_template('dashboard.html',
                            containers=containers,
-                           user=user, status=status)
+                           user=user, status=status, detail=detail)
 
 
 @view.route('/kill/<short_id>', methods=['GET'])

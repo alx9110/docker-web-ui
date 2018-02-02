@@ -2,7 +2,13 @@
 {% block content %}
 <br/>
 <div class="container">
-    <code>Running: {{ status['count'] }} app</code>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    
+<div id="ram"></div>
 </div>
 
 <div class="container">
@@ -55,4 +61,44 @@
             </tbody>
           </table>
 </div>
+
+<script>
+
+var chart = Highcharts.chart('ram', {
+chart: {
+      inverted: true,
+      polar: false
+  },
+
+title: {
+    text: 'Running: {{ status["count"] }} app'
+},
+
+yAxis: {
+        title: {
+            text: 'RAM usage'
+        },
+        allowDecimals: true,
+    },
+
+xAxis: {
+    categories: [{% for s in detail %}'{{s["name"]}}',{% endfor %}]
+},
+
+series: [{
+    type: 'column',
+    colorByPoint: true,
+    name: 'percent of total ram',
+    data: [{% for s in detail %}{{(s["memory_stats"]["max_usage"]/s["memory_stats"]["limit"])*100|round(2, 'floor')}},{% endfor %}],
+    showInLegend: false
+}],
+
+rangeSelector: {
+	floating: true,
+     y: 100
+},
+
+});
+
+</script>
 {% endblock %}
