@@ -10,4 +10,4 @@ def build_from_git(url):
     clone = Popen(cmd.format(url, tmp_name),
                 shell=True, stdout=PIPE, universal_newlines=True
                )
-    return clone.stdout.read() + build.stdout.read() + clean.stdout.read()
+    return clone.stdout.read()
