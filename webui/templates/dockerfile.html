@@ -2,9 +2,9 @@
 {% block content %}
 <br/>
 <div class="container">
-    <form action="/build" method="POST">
+    <form action="/dockerfile" method="POST">
     <div class="input-group mb-3">
-        <input name='repo' type="text" class="form-control" placeholder="Use Git the web URL.">
+        <input name='url' type="text" class="form-control" placeholder="Use Git the web URL.">
         <div class="input-group-append">
           <button class="btn btn-success" type="submit">Clone&Build</button>
         </div>

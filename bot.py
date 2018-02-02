@@ -1,3 +1,4 @@
+#!coding: utf-8
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 import os 
@@ -26,7 +27,7 @@ def image_show(bot, update):
 
 def main():
     # logging.basicConfig(level=logging.DEBUG)
-    updater = Updater("510202673:AAEva8TduvxqT0JFQGCql_4n18ICBqyNok4")
+    updater = Updater(os.getenv('DCKUI-TOKEN'))
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     #dp.add_handler(MessageHandler(Filters.text, talk_to_me))
