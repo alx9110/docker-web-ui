@@ -1,5 +1,6 @@
 """ General route """
 from flask import render_template, Blueprint, session, redirect, flash, jsonify
+from webui.common.logger import logger
 import docker
 import json
 
@@ -27,5 +28,6 @@ def kill(short_id):
     """ Kill container """
     client = docker.from_env()
     client.containers.get(short_id).kill()
+    logger.info('{0} has been killed'.format(short_id))
     flash('Container has been killed', 'success')
     return redirect('/')

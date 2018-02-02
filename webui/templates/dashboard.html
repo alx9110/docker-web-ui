@@ -1,65 +1,100 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+#container {
+	height: 100px;
+	margin: 0 auto;
+}
+</style>
 <br/>
-<div class="container">
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-more.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-    
-<div id="ram"></div>
-</div>
+
+
+
+
 
 <div class="container">
-    <h4 align='center'>Running containers</h4>
-    <div class="row">
-        {% for c in containers %}
-        <div style="font-size: 14px;" class="col-sm-4">
-            <div style="height: 160px;" class="card text-white bg-primary mb-3">
-                <div class="card-header">{{ c.name }} | <a href="/kill/{{ c.short_id }}"><i style="color: #fff;" class="fa fa-power-off" aria-hidden="true"></i></a></div>
-                <div class="card-body">
-                  <h4 style="font-size: 12px;" class="card-title">{{ c.image }}</h4>
-                  <p class="card-text">
-                    {% for key in c.attrs['NetworkSettings']['Ports'] %}
-                    { {{ key }}: {{ c.attrs['NetworkSettings']['Ports'][key]}} }
-                    {% endfor %}
-                  </p>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Charts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-linode" aria-hidden="true"></i> Dock</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-table" aria-hidden="true"></i> Table</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <!-- Charts -->
+<div class="container">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <div id="ram"></div>
+  </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="container">
+            <h4 align='center'>Running containers</h4>
+            <div class="row">
+                {% for c in containers %}
+                <div style="font-size: 14px;" class="col-sm-4">
+                    <div style="min-height: 160px;" class="card text-white bg-primary mb-3 col-12">
+                        <div class="card-header">{{ c.name }} | <a href="/kill/{{ c.short_id }}"><i style="color: #fff;" class="fa fa-power-off" aria-hidden="true"></i></a></div>
+                        <div class="card-body">
+                          <h4 style="font-size: 12px;" class="card-title">{{ c.image }}</h4>
+                          <p class="card-text">
+                            {% for key in c.attrs['NetworkSettings']['Ports'] %}
+                            { {{ key }}: {{ c.attrs['NetworkSettings']['Ports'][key]}} }
+                            {% endfor %}
+                          </p>
+                        </div>
+                      </div>
                 </div>
+                {% endfor %}
               </div>
         </div>
-        {% endfor %}
-      </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="container">
+            <table style="font-size: 14px;" class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">ACTION</th>
+                        <th scope="col">SHORT_ID</th>
+                        <th scope="col">IMAGE</th>
+                        <th scope="col">IP</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">PORTS</th>
+                        <th scope="col">NAMES</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for c in containers %}
+                      <tr>
+                        <td>
+                          <a href="/kill/{{ c.short_id }}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                          <a target="_blank" href="http://ec2-54-245-54-226.us-west-2.compute.amazonaws.com:{{ c.attrs['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'] }}">web</a>
+                        </td>
+                        <td>{{ c.short_id }}</td>
+                        <td>{{ c.image }}</td>
+                        <td>{{ c.attrs['NetworkSettings']['IPAddress'] }}</td>
+                        <td>{{ c.status }}</td>
+                        <td>{{ c.attrs['NetworkSettings']['Ports'] }}</td>
+                        <td>{{ c.name }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+        </div>
+    </div>
+  </div>
 
-    <table style="font-size: 14px;" class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">ACTION</th>
-                <th scope="col">SHORT_ID</th>
-                <th scope="col">IMAGE</th>
-                <th scope="col">IP</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">PORTS</th>
-                <th scope="col">NAMES</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for c in containers %}
-              <tr>
-                <td>
-                  <a href="/kill/{{ c.short_id }}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                  <a target="_blank" href="http://ec2-54-245-54-226.us-west-2.compute.amazonaws.com:{{ c.attrs['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'] }}">web</a>
-                </td>
-                <td>{{ c.short_id }}</td>
-                <td>{{ c.image }}</td>
-                <td>{{ c.attrs['NetworkSettings']['IPAddress'] }}</td>
-                <td>{{ c.status }}</td>
-                <td>{{ c.attrs['NetworkSettings']['Ports'] }}</td>
-                <td>{{ c.name }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+
+
 </div>
 
 <script>
@@ -76,7 +111,7 @@ title: {
 
 yAxis: {
         title: {
-            text: 'RAM usage'
+            text: 'RAM usage %'
         },
         allowDecimals: true,
     },

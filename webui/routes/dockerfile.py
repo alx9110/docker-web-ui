@@ -1,6 +1,7 @@
 """ General route """
 from flask import request, render_template, Blueprint, session, flash
 from webui.tasks import build_from_git
+from webui.common.logger import logger
 from rq import Queue
 from redis import Redis
 

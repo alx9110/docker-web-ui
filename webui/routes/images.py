@@ -1,5 +1,6 @@
 """ General route """
 from flask import render_template, Blueprint, session, redirect, flash
+from webui.common.logger import logger
 import docker
 
 
@@ -21,6 +22,7 @@ def run_image(name):
     client = docker.client.from_env()
     client.containers.run(name.replace('sha256:', ''), detach=True, ports={'80/tcp': None})
     flash('Container is started', 'success')
+    logger.info('{0} has been started'.format(name))
     return redirect('/images')
 
 
@@ -31,6 +33,7 @@ def remove_image(name):
     try:
         client.images.remove(name.replace('sha256:', ''), force=True)
         flash('Image has been removed', 'success')
+        logger.info('{0} has been deleted'.format(name))
         return redirect('/images')
     except docker.errors.APIError:
         flash(str(docker.errors.APIError.__doc__), 'danger')
