@@ -42,7 +42,7 @@
               <tr>
                 <td>
                   <a href="/kill/{{ c.short_id }}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                  <a target="_blank" href="http://ec2-54-245-54-226.us-west-2.compute.amazonaws.com/:{{ c.attrs['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'] }}">web</a>
+                  <a target="_blank" href="http://ec2-54-245-54-226.us-west-2.compute.amazonaws.com:{{ c.attrs['NetworkSettings']['Ports']['80/tcp'][0]['HostPort'] }}">web</a>
                 </td>
                 <td>{{ c.short_id }}</td>
                 <td>{{ c.image }}</td>
