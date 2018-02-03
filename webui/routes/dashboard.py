@@ -18,9 +18,13 @@ def dashboard():
              }
     detail = [json.loads(next(c.stats()), encoding='utf-8') for c in containers]
     # return jsonify(detail[0])
+    logs = open('/var/log/dockerwebui.log', 'r').readlines()[::-1]
     return render_template('dashboard.html',
                            containers=containers,
-                           user=user, status=status, detail=detail)
+                           user=user, status=status,
+                           detail=detail,
+                           logs=logs,
+                          )
 
 
 @view.route('/kill/<short_id>', methods=['GET'])

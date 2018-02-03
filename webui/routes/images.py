@@ -37,4 +37,6 @@ def remove_image(name):
         return redirect('/images')
     except docker.errors.APIError:
         flash(str(docker.errors.APIError.__doc__), 'danger')
+        logger.error('Delete image error')
+        logger.debug('{0} Remove error')
         return redirect('/images')

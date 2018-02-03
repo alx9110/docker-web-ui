@@ -8,6 +8,7 @@ from flask import render_template,\
                   session,\
                   current_app
 import docker
+from webui.common.logger import logger
 
 
 view = Blueprint('networks', __name__)
@@ -18,8 +19,7 @@ def networks():
     """ Network list """
     client = docker.from_env()
     nets = client.networks.list()
-    user = session.get('login', None)
-    return render_template('networks.html', user=user, nets=nets)
+    return render_template('networks.html', nets=nets)
 
 
 @view.route('/networks/create', methods=['GET'])
@@ -36,10 +36,6 @@ def network_create():
 def network_remove(name=None):
     """ Remove network """
     client = docker.from_env()
-    user = session.get('login', None)
-    if user != current_app.config.get('ROOT_LOGIN', None):
-        flash('ACL warning: You don\'t remove this network.', 'danger')
-        return redirect('/networks')
     client.networks.get(name).remove()
     flash('network <{name}> has been remove'.format(name=name), 'success')
     return redirect('/networks')
